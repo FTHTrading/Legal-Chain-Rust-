@@ -1,0 +1,45 @@
+[package]
+name        = "legal-chain-explorer-api"
+version     = "0.1.0"
+edition.workspace     = true
+authors.workspace     = true
+license.workspace     = true
+repository.workspace  = true
+homepage.workspace    = true
+description = "REST API for querying indexed legal-chain data from Postgres."
+
+[[bin]]
+name = "legal-chain-explorer-api"
+path = "src/main.rs"
+
+[dependencies]
+# Web framework
+axum        = { version = "0.7", features = ["macros"] }
+tower       = "0.4"
+tower-http  = { version = "0.5", features = ["cors", "trace", "compression-gzip"] }
+
+# Async runtime
+tokio       = { version = "1", features = ["full"] }
+
+# Database
+sqlx        = { version = "0.7", features = ["runtime-tokio", "tls-rustls", "postgres", "chrono", "uuid"] }
+
+# Serialization
+serde       = { version = "1.0", features = ["derive"] }
+serde_json  = "1.0"
+
+# Logging
+tracing            = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+
+# CLI
+clap = { version = "4.5", features = ["derive", "env"] }
+
+# Chrono for timestamps
+chrono = { version = "0.4", features = ["serde"] }
+
+# Error handling
+anyhow = "1"
+
+# UUID support
+uuid = { version = "1", features = ["serde", "v4"] }

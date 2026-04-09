@@ -12,6 +12,9 @@ members = [
     "pallets/access-control",
     "pallets/agent-policy",
     "crates/common-types",
+    "services/indexer",
+    "services/explorer-api",
+    "services/proof-service",
 ]
 
 [workspace.package]

@@ -108,6 +108,14 @@ The chain does **NOT** store raw privileged legal content. It stores **hashes, r
 | `SubjectType` | Matter, Evidence, Document, Approval, Attestation, Settlement, Identity, AgentPolicy |
 | `ActionType` | Create, Update, Delete, StatusChange, Verify, Approve, Reject, Supersede, CustodyTransfer, Attest, Revoke, Register, Settle |
 
+### Phase 3 — Data Services
+
+| Service | Port | Purpose |
+|:--------|:----:|:--------|
+| `legal-chain-indexer` | — | Subscribes to finalized blocks via WebSocket RPC, decodes events, writes to Postgres |
+| `legal-chain-explorer-api` | 8300 | REST API (Axum) — 17 endpoints for blocks, events, matters, evidence, documents, approvals, identities, audit, stats |
+| `legal-chain-proof-service` | 8400 | Fetches Merkle read-proofs from the node, produces signed `ProofBundle` for legal discovery |
+
 ### Cross-Pallet Integration
 
 ```
@@ -144,7 +152,7 @@ All pallets call `AuditHook::on_state_change()` on every mutation — ensuring a
 | **0** | Foundation — scaffold, docs, shared types | ✅ Complete |
 | **1** | Chain Core — node, runtime, matters / evidence / documents / audit | ✅ Complete |
 | **2** | Workflow — approvals, identities, access-control, agent-policy | ✅ Complete |
-| **3** | Data Services — indexer, explorer API, proof service | 🔲 Planned |
+| **3** | Data Services — indexer, explorer API, proof service | ✅ Complete |
 | **4** | Integration — TypeScript client, web SDK, proof bundles | 🔲 Planned |
 | **5** | Hardening — threat model, negative tests, runbooks, observability | 🔲 Planned |
 
@@ -210,6 +218,11 @@ legal-chain-core/
 │   ├── access-control/      #     Matter-scoped RBAC
 │   └── agent-policy/        #     AI agent policies + rate limits
 │
+├── services/                # 🔌  Off-chain data services
+│   ├── indexer/             #     Block subscriber → Postgres ETL
+│   ├── explorer-api/        #     REST API (Axum) for indexed data
+│   └── proof-service/       #     Merkle proof & integrity verification
+│
 ├── crates/                  # 📦  Shared libraries
 │   └── common-types/        #     Domain types, AuditHook trait
 │
@@ -220,7 +233,7 @@ legal-chain-core/
 │   └── OPERATOR-SUMMARY.md
 │
 ├── scripts/                 # 🔧  Bootstrap & automation
-├── Cargo.toml               #     Workspace root (11 members)
+├── Cargo.toml               #     Workspace root (14 members)
 ├── Cargo.lock               #     Curated lockfile with pins
 ├── rust-toolchain.toml      #     Rust 1.88.0 + wasm32 target
 ├── Dockerfile               #     Multi-stage build (rust:1.88)

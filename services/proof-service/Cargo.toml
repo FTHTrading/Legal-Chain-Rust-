@@ -1,0 +1,51 @@
+[package]
+name        = "legal-chain-proof-service"
+version     = "0.1.0"
+edition.workspace     = true
+authors.workspace     = true
+license.workspace     = true
+repository.workspace  = true
+homepage.workspace    = true
+description = "Merkle proof and integrity verification service for legal-chain state."
+
+[[bin]]
+name = "legal-chain-proof-service"
+path = "src/main.rs"
+
+[dependencies]
+# Web framework
+axum        = { version = "0.7", features = ["macros"] }
+tower       = "0.4"
+tower-http  = { version = "0.5", features = ["cors", "trace"] }
+
+# Async runtime
+tokio       = { version = "1", features = ["full"] }
+
+# Substrate client for state queries
+jsonrpsee   = { version = "0.22", features = ["ws-client", "http-client"] }
+
+# SCALE decoding
+codec       = { package = "parity-scale-codec", version = "3.6", features = ["derive"] }
+
+# Serialization
+serde       = { version = "1.0", features = ["derive"] }
+serde_json  = "1.0"
+
+# Logging
+tracing            = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+
+# CLI
+clap = { version = "4.5", features = ["derive", "env"] }
+
+# Hex encoding
+hex = "0.4"
+
+# Chrono
+chrono = { version = "0.4", features = ["serde"] }
+
+# Error handling
+anyhow = "1"
+
+# Hash verification
+blake2 = "0.10"
