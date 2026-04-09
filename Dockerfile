@@ -4,7 +4,7 @@
 # Run:     docker run --rm -p 9944:9944 -p 30333:30333 legal-chain-node --dev
 
 # ── Stage 1: Builder ────────────────────────────────────────────────
-FROM rust:1.81-bookworm AS builder
+FROM rust:1.88-bookworm AS builder
 
 RUN rustup target add wasm32-unknown-unknown
 RUN apt-get update && apt-get install -y \
