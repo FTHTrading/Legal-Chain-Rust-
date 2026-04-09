@@ -7,6 +7,10 @@ members = [
     "pallets/evidence",
     "pallets/documents",
     "pallets/audit",
+    "pallets/approvals",
+    "pallets/identities",
+    "pallets/access-control",
+    "pallets/agent-policy",
     "crates/common-types",
 ]
 
@@ -94,6 +98,10 @@ pallet-matters           = { path = "pallets/matters", default-features = false 
 pallet-evidence          = { path = "pallets/evidence", default-features = false }
 pallet-documents         = { path = "pallets/documents", default-features = false }
 pallet-audit             = { path = "pallets/audit", default-features = false }
+pallet-approvals         = { path = "pallets/approvals", default-features = false }
+pallet-identities        = { path = "pallets/identities", default-features = false }
+pallet-access-control    = { path = "pallets/access-control", default-features = false }
+pallet-agent-policy      = { path = "pallets/agent-policy", default-features = false }
 
 # ── Build Profiles ──────────────────────────────────────────────
 [profile.release]

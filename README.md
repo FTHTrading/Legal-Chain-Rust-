@@ -80,7 +80,7 @@ See [docs/RUNBOOK_LOCAL.md](docs/RUNBOOK_LOCAL.md) for full setup including inde
 |-------|-------|--------|
 | 0 | Foundation — scaffold, docs, shared types | ✅ |
 | 1 | Chain Core — node, runtime, matters/evidence/documents/audit | ✅ |
-| 2 | Workflow — approvals, identities, access-control, agent-policy | ⬜ |
+| 2 | Workflow — approvals, identities, access-control, agent-policy | ✅ |
 | 3 | Data Services — indexer, explorer API, proof service | ⬜ |
 | 4 | Integration — TypeScript client, web SDK, proof bundles | ⬜ |
 | 5 | Hardening — threat model, negative tests, runbooks, observability | ⬜ |

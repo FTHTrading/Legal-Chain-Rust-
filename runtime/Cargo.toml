@@ -49,6 +49,10 @@ pallet-matters = { workspace = true }
 pallet-evidence = { workspace = true }
 pallet-documents = { workspace = true }
 pallet-audit = { workspace = true }
+pallet-approvals = { workspace = true }
+pallet-identities = { workspace = true }
+pallet-access-control = { workspace = true }
+pallet-agent-policy = { workspace = true }
 
 [build-dependencies]
 substrate-wasm-builder = { git = "https://github.com/paritytech/polkadot-sdk", tag = "polkadot-stable2409" }
@@ -89,6 +93,10 @@ std = [
     "pallet-evidence/std",
     "pallet-documents/std",
     "pallet-audit/std",
+    "pallet-approvals/std",
+    "pallet-identities/std",
+    "pallet-access-control/std",
+    "pallet-agent-policy/std",
 ]
 runtime-benchmarks = [
     "frame-support/runtime-benchmarks",
@@ -101,6 +109,10 @@ runtime-benchmarks = [
     "pallet-evidence/runtime-benchmarks",
     "pallet-documents/runtime-benchmarks",
     "pallet-audit/runtime-benchmarks",
+    "pallet-approvals/runtime-benchmarks",
+    "pallet-identities/runtime-benchmarks",
+    "pallet-access-control/runtime-benchmarks",
+    "pallet-agent-policy/runtime-benchmarks",
     "sp-runtime/runtime-benchmarks",
 ]
 try-runtime = [
@@ -116,4 +128,8 @@ try-runtime = [
     "pallet-evidence/try-runtime",
     "pallet-documents/try-runtime",
     "pallet-audit/try-runtime",
+    "pallet-approvals/try-runtime",
+    "pallet-identities/try-runtime",
+    "pallet-access-control/try-runtime",
+    "pallet-agent-policy/try-runtime",
 ]

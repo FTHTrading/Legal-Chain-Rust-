@@ -3594,12 +3594,16 @@ dependencies = [
  "frame-system",
  "frame-system-rpc-runtime-api",
  "legal-chain-common-types",
+ "pallet-access-control",
+ "pallet-agent-policy",
+ "pallet-approvals",
  "pallet-audit",
  "pallet-aura",
  "pallet-balances",
  "pallet-documents",
  "pallet-evidence",
  "pallet-grandpa",
+ "pallet-identities",
  "pallet-matters",
  "pallet-sudo",
  "pallet-timestamp",
@@ -5091,6 +5095,48 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "04744f49eae99ab78e0d5c0b603ab218f515ea8cfe5a456d7629ad883a3b6e7d"
 
 [[package]]
+name = "pallet-access-control"
+version = "0.1.0"
+dependencies = [
+ "frame-support",
+ "frame-system",
+ "legal-chain-common-types",
+ "parity-scale-codec",
+ "scale-info",
+ "sp-core",
+ "sp-io",
+ "sp-runtime",
+]
+
+[[package]]
+name = "pallet-agent-policy"
+version = "0.1.0"
+dependencies = [
+ "frame-support",
+ "frame-system",
+ "legal-chain-common-types",
+ "parity-scale-codec",
+ "scale-info",
+ "sp-core",
+ "sp-io",
+ "sp-runtime",
+]
+
+[[package]]
+name = "pallet-approvals"
+version = "0.1.0"
+dependencies = [
+ "frame-support",
+ "frame-system",
+ "legal-chain-common-types",
+ "parity-scale-codec",
+ "scale-info",
+ "sp-core",
+ "sp-io",
+ "sp-runtime",
+]
+
+[[package]]
 name = "pallet-audit"
 version = "0.1.0"
 dependencies = [
@@ -5196,6 +5242,20 @@ dependencies = [
  "sp-runtime",
  "sp-session",
  "sp-staking",
+]
+
+[[package]]
+name = "pallet-identities"
+version = "0.1.0"
+dependencies = [
+ "frame-support",
+ "frame-system",
+ "legal-chain-common-types",
+ "parity-scale-codec",
+ "scale-info",
+ "sp-core",
+ "sp-io",
+ "sp-runtime",
 ]
 
 [[package]]

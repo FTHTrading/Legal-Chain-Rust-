@@ -276,6 +276,58 @@ impl pallet_audit::Config for Runtime {
     type RuntimeEvent = RuntimeEvent;
 }
 
+// ─── Phase 2 — Workflow Pallets ────────────────────────────────────
+
+// pallet-approvals
+parameter_types! {
+    pub const MaxReviewers: u32 = 16;
+    pub const DefaultExpiryBlocks: BlockNumber = 14400; // ~24 hours at 6s blocks
+}
+
+impl pallet_approvals::Config for Runtime {
+    type RuntimeEvent = RuntimeEvent;
+    type AuditHook = Audit;
+    type MaxReviewers = MaxReviewers;
+    type DefaultExpiryBlocks = DefaultExpiryBlocks;
+}
+
+// pallet-identities
+parameter_types! {
+    pub const MaxOrgLength: u32 = 128;
+    pub const MaxJurisdictions: u32 = 8;
+}
+
+impl pallet_identities::Config for Runtime {
+    type RuntimeEvent = RuntimeEvent;
+    type AuditHook = Audit;
+    type MaxOrgLength = MaxOrgLength;
+    type MaxJurisdictions = MaxJurisdictions;
+}
+
+// pallet-access-control
+parameter_types! {
+    pub const MaxPermissionsPerGrant: u32 = 8;
+}
+
+impl pallet_access_control::Config for Runtime {
+    type RuntimeEvent = RuntimeEvent;
+    type AuditHook = Audit;
+    type MaxPermissionsPerGrant = MaxPermissionsPerGrant;
+}
+
+// pallet-agent-policy
+parameter_types! {
+    pub const MaxScopeEntries: u32 = 16;
+    pub const MaxActionsPerBlock: u32 = 100;
+}
+
+impl pallet_agent_policy::Config for Runtime {
+    type RuntimeEvent = RuntimeEvent;
+    type AuditHook = Audit;
+    type MaxScopeEntries = MaxScopeEntries;
+    type MaxActionsPerBlock = MaxActionsPerBlock;
+}
+
 // ─── Construct Runtime ─────────────────────────────────────────────
 
 frame_support::construct_runtime!(
@@ -289,11 +341,17 @@ frame_support::construct_runtime!(
         TransactionPayment: pallet_transaction_payment = 5,
         Sudo: pallet_sudo = 6,
 
-        // Legal pallets — indices 10+ reserved for domain logic
+        // Legal pallets — Phase 1
         Matters: pallet_matters = 10,
         Evidence: pallet_evidence = 11,
         Documents: pallet_documents = 12,
         Audit: pallet_audit = 13,
+
+        // Workflow pallets — Phase 2
+        Approvals: pallet_approvals = 14,
+        Identities: pallet_identities = 15,
+        AccessControl: pallet_access_control = 16,
+        AgentPolicy: pallet_agent_policy = 17,
     }
 );
 
