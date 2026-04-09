@@ -85,6 +85,13 @@ See [docs/RUNBOOK_LOCAL.md](docs/RUNBOOK_LOCAL.md) for full setup including inde
 | 4 | Integration — TypeScript client, web SDK, proof bundles | ⬜ |
 | 5 | Hardening — threat model, negative tests, runbooks, observability | ⬜ |
 
+## Repository Branches
+
+| Branch | Contents |
+|--------|----------|
+| `main` | Next.js web app — UI, API routes, Zod schemas |
+| `substrate-core` | Rust blockchain — Substrate node, runtime, FRAME pallets |
+
 ## License
 
 BUSL-1.1 — Business Source License
