@@ -1,0 +1,83 @@
+# docker-compose.yml — 3-validator local LEGAL-CHAIN testnet
+#
+# Usage:
+#   docker compose up -d          # Start 3-node testnet
+#   docker compose logs -f alice  # Follow Alice's logs
+#   docker compose down -v        # Stop and purge all data
+#
+# Prerequisites:
+#   - Docker image built: docker build -t legal-chain-node .
+
+version: "3.8"
+
+x-node-defaults: &node-defaults
+  image: legal-chain-node:latest
+  restart: unless-stopped
+  networks:
+    - legal-chain
+
+services:
+  alice:
+    <<: *node-defaults
+    container_name: legal-chain-alice
+    ports:
+      - "9944:9944"   # RPC (WebSocket + HTTP)
+      - "30333:30333" # P2P
+    command:
+      - "--chain=local"
+      - "--alice"
+      - "--validator"
+      - "--rpc-cors=all"
+      - "--rpc-methods=unsafe"
+      - "--rpc-port=9944"
+      - "--rpc-external"
+      - "--port=30333"
+      - "--node-key=0000000000000000000000000000000000000000000000000000000000000001"
+      - "--force-authoring"
+    volumes:
+      - alice-data:/data
+
+  bob:
+    <<: *node-defaults
+    container_name: legal-chain-bob
+    ports:
+      - "9945:9944"
+      - "30334:30333"
+    command:
+      - "--chain=local"
+      - "--bob"
+      - "--validator"
+      - "--rpc-cors=all"
+      - "--rpc-port=9944"
+      - "--rpc-external"
+      - "--port=30333"
+      - "--bootnodes=/dns/alice/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEb"
+    volumes:
+      - bob-data:/data
+
+  charlie:
+    <<: *node-defaults
+    container_name: legal-chain-charlie
+    ports:
+      - "9946:9944"
+      - "30335:30333"
+    command:
+      - "--chain=local"
+      - "--charlie"
+      - "--validator"
+      - "--rpc-cors=all"
+      - "--rpc-port=9944"
+      - "--rpc-external"
+      - "--port=30333"
+      - "--bootnodes=/dns/alice/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEb"
+    volumes:
+      - charlie-data:/data
+
+volumes:
+  alice-data:
+  bob-data:
+  charlie-data:
+
+networks:
+  legal-chain:
+    driver: bridge
